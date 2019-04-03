@@ -10,110 +10,125 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= libft.a
+NAME		=	libft.a
 
-HEAD		= src/libft.h
-HEAD_GCH	= src/libft.h.gch
+COM			=	gcc
+S_LIB		=	ar rc
+FLAGS		=	-Wall -Wextra -Werror
+OPTIMA		=	-O3
 
-CC			= gcc
-FLAGS		= -Wall -Wextra -Werror -O2 -pipe
+SRC_DIR		=	./srcs/
+INC_DIR		=	./includes/
+OBJ_DIR		=	./objs/
 
-SRC			= src/ft_putchar.c	\
-			src/ft_putchar_fd.c	\
-			src/ft_putstr.c 	\
-			src/ft_putstr_fd.c	\
-			src/ft_putendl.c	\
-			src/ft_putendl_fd.c	\
-			src/ft_putnbr.c		\
-			src/ft_putnbr_fd.c	\
-			src/ft_memset.c		\
-			src/ft_bzero.c		\
-			src/ft_memcpy.c		\
-			src/ft_memccpy.c	\
-			src/ft_memmove.c	\
-			src/ft_memchr.c		\
-			src/ft_memcmp.c		\
-			src/ft_strlen.c		\
-			src/ft_strdup.c		\
-			src/ft_strndup.c	\
-			src/ft_strcpy.c		\
-			src/ft_strncpy.c	\
-			src/ft_strcat.c		\
-			src/ft_strlcat.c	\
-			src/ft_strncat.c	\
-			src/ft_strchr.c		\
-			src/ft_strrchr.c	\
-			src/ft_strstr.c		\
-			src/ft_strnstr.c	\
-			src/ft_strcmp.c		\
-			src/ft_strncmp.c	\
-			src/ft_isalpha.c	\
-			src/ft_isdigit.c	\
-			src/ft_isalnum.c	\
-			src/ft_isascii.c	\
-			src/ft_isprint.c	\
-			src/ft_toupper.c	\
-			src/ft_tolower.c	\
-			src/ft_lerpi.c		\
-			src/ft_atoi.c		\
-			src/ft_atoi_base.c	\
-			src/ft_itoa.c		\
-			src/ft_memalloc.c	\
-			src/ft_memdel.c		\
-			src/ft_strnew.c		\
-			src/ft_strdel.c		\
-			src/ft_strclr.c		\
-			src/ft_striter.c	\
-			src/ft_striteri.c	\
-			src/ft_strmap.c		\
-			src/ft_strmapi.c	\
-			src/ft_strequ.c		\
-			src/ft_strnequ.c	\
-			src/ft_strsub.c		\
-			src/ft_strjoin.c	\
-			src/ft_strtrim.c	\
-			src/ft_strsplit.c	\
-			src/ft_lstnew.c		\
-			src/ft_lstdelone.c	\
-			src/ft_lstdel.c		\
-			src/ft_lstdel.c		\
-			src/ft_lstadd.c		\
-			src/ft_lstiter.c	\
-			src/ft_lstmap.c		\
-			src/ft_is_prime.c	\
-			src/ft_swap.c		\
-			src/ft_sqrt.c		\
-			src/ft_power.c		\
-			src/ft_factorial.c	\
-			src/ft_clamp.c		\
-			src/get_next_line.c
+SRC_FILES	= 	ft_putchar.c	\
+				ft_putchar_fd.c	\
+				ft_putstr.c 	\
+				ft_putstr_fd.c	\
+				ft_putendl.c	\
+				ft_putendl_fd.c	\
+				ft_putnbr.c		\
+				ft_putnbr_fd.c	\
+				ft_memset.c		\
+				ft_bzero.c		\
+				ft_memcpy.c		\
+				ft_memccpy.c	\
+				ft_memmove.c	\
+				ft_memchr.c		\
+				ft_memcmp.c		\
+				ft_strlen.c		\
+				ft_strdup.c		\
+				ft_strndup.c	\
+				ft_strcpy.c		\
+				ft_strncpy.c	\
+				ft_strcat.c		\
+				ft_strlcat.c	\
+				ft_strncat.c	\
+				ft_strchr.c		\
+				ft_strrchr.c	\
+				ft_strstr.c		\
+				ft_strnstr.c	\
+				ft_strcmp.c		\
+				ft_strncmp.c	\
+				ft_isalpha.c	\
+				ft_isdigit.c	\
+				ft_isalnum.c	\
+				ft_isascii.c	\
+				ft_isprint.c	\
+				ft_toupper.c	\
+				ft_tolower.c	\
+				ft_lerpi.c		\
+				ft_atoi.c		\
+				ft_atof.c 		\
+				ft_atoi_base.c	\
+				ft_itoa.c		\
+				ft_memalloc.c	\
+				ft_memdel.c		\
+				ft_strnew.c		\
+				ft_strdel.c		\
+				ft_strclr.c		\
+				ft_striter.c	\
+				ft_striteri.c	\
+				ft_strmap.c		\
+				ft_strmapi.c	\
+				ft_strequ.c		\
+				ft_strnequ.c	\
+				ft_strsub.c		\
+				ft_strjoin.c	\
+				ft_strtrim.c	\
+				ft_strsplit.c	\
+				ft_strsplitlen.c\
+				ft_lstnew.c		\
+				ft_lstdelone.c	\
+				ft_lstdel.c		\
+				ft_lstdel.c		\
+				ft_lstadd.c		\
+				ft_lstiter.c	\
+				ft_lstmap.c		\
+				ft_is_prime.c	\
+				ft_swap.c		\
+				ft_sqrt.c		\
+				ft_power.c		\
+				ft_factorial.c	\
+				ft_clamp.c		\
+				get_next_line.c
 
-OBJ		= $(patsubst src/%.c,obj/%.o,$(SRC))
-.SILENT:
-
-all: $(NAME)
-
-obj/%.o: src/%.c
-	mkdir -p obj
-	$(CC) $(FLAG) -c $< -o $@
-	printf '\033[31m ✔  %s\n\033[0m' "$<"
+INC_FILES 	= 	libft.h 		\
+				get_next_line.h
 
 
-$(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ)
-	printf '\033[32m ✔  %s\n\033[0m' "Create Libft"
+OBJ_FILES 	=	$(SRC_FILES:.c=.o)
+
+SRCS 		=	$(addprefix $(SRC_DIR), $(SRC_FILES))
+HDRS 		=	$(addprefix $(INC_DIR), $(INC_FILES))
+OBJS 		= 	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
+
+GREEN		=	\033[32m
+RESET		=	\033[39m
+YELLOW		=	\033[33m
+RED 		=	\033[31m
+
+all: obj $(NAME)
+
+obj:
+	@mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)%.o:$(SRC_DIR)%.c
+	$(COM) $(FLAGS) $(OPTIMA) -c $< -o $@ -I $(INC_DIR)
+
+$(NAME): $(OBJS) $(HDRS)
+	@$(S_LIB) $(NAME) $(OBJS)
+	@ echo "$(GREEN)Attention: $(YELLOW)$(NAME)$(RESET) installed"
 
 clean:
-	rm -rf $(OBJ)
-	rm -f $(HEAD_GCH)
-	printf '\033[33m ✔  %s\n\033[0m' "Clean Libft"
+	@rm -rf $(OBJ_FILES)
+	@rm -rf $(OBJ_DIR)
+	@ echo "$(RED)Attention: $(YELLOW)$(NAME)$(RESET) object removed"
 
 fclean: clean
-	rm -rf obj
-	rm -f $(NAME)
-	printf '\033[33m ✔  %s\n\033[0m' "Fclean Libft"
+	@rm -rf $(NAME)
+	@echo "$(RED)Attention: $(YELLOW)$(NAME)$(RESET) removed"
 
-re: fclean all
+re:	fclean all
 
-all: $(NAME)
-.PHONY: clean fclean re all 
+.PHONY: all clean fclean re
